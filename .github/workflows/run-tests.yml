@@ -1,0 +1,26 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up C compiler
+        run: |
+          sudo apt-get install -y build-essential
+
+      - name: Compile code
+        run: |
+          gcc -o myproxy myproxy.c csapp.c 
+
+      - name: Run tests
+        run: |
+          ./myproxy <port> 
